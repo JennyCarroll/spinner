@@ -15,12 +15,15 @@ const spinner = function (spinnerArray, whenToStop) {
   let time = 100;
   let counter = 0;
   while (time <= whenToStop) {
+    //we need to do is to get the char we are looking for before the setTimeout
+    // so it does not change when the value of counter changes.
+    // because we are using counter in setTimeout which results in always checking
+    // the last value for counter (counter =45), because we increase it in the loop.
+    let char = spinnerArray[counter % spinnerArray.length];
     setTimeout(() => {
-      process.stdout.write(spinnerArray[counter % spinnerArray.length]);
+      process.stdout.write(char);
     }, time);
-    console.log(spinnerArray[counter % spinnerArray.length]);
     time += 200;
-    // console.log(counter % spinnerArray.length);
     ++counter;
   }
 };
